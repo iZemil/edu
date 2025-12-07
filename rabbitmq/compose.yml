@@ -1,0 +1,18 @@
+services:
+    rabbitmq:
+        image: rabbitmq:3-management # Or a newer version like rabbitmq:4-management
+        container_name: rabbitmq
+        restart: unless-stopped
+        ports:
+            - "5672:5672" # AMQP protocol port
+            - "15672:15672" # RabbitMQ Management UI port
+        environment:
+            RABBITMQ_DEFAULT_USER: user # Customize username
+            RABBITMQ_DEFAULT_PASS: password # Customize password
+            # RABBITMQ_DEFAULT_VHOST: / # Optional: Set a default virtual host if needed
+        volumes:
+            - rabbitmq_data:/var/lib/rabbitmq # Persistent storage for RabbitMQ data
+
+volumes:
+    rabbitmq_data:
+        driver: local
